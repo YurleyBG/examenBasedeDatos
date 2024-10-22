@@ -1,0 +1,469 @@
+LIBRERÍA EL MUNDO DE SOFIA
+
+
+
+
+
+
+
+
+
+YURLEY BOTELLO GARCIA
+
+
+
+T2
+
+
+
+PEDRO FELIPE GÓMEZ BONILLA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CAMPUSLANDS
+ARTEMIS
+RUTA JAVA
+TIBU NORTE DE SANTANDER
+2024
+
+
+
+
+
+
+
+Tabla de Contenidos
+
+Introducción	4
+Caso de Estudio	5
+Planificación	5
+Construcción del Modelo Conceptual	5
+Descripción	5
+Gráfica	5
+Descripción Técnica	6
+Construcción del Modelo Lógico	6
+Descripción	6
+Gráfica	6
+Descripción Técnica	6
+Normalización del Modelo Lógico	6
+Primera Forma Normal (1FN)	7
+Descripción	7
+Gráfica	7
+Descripción Técnica	7
+Segunda Forma Normal (2FN)	7
+Descripción	8
+Gráfica	8
+Descripción Técnica	8
+Tercera Forma Normal (3FN)	8
+Descripción	8
+Gráfica	8
+Descripción Técnica	8
+Construcción del Modelo Físico	9
+Descripción	9
+Código	9
+Descripción Técnica	10
+Diagrama E-R	10
+Descripción	10
+Gráfica	10
+Descripción Técnica	10
+Tablas	11
+Descripción	11
+Gráfica	11
+Descripción Técnica	11
+Relaciones entre Tablas	11
+Descripción	11
+Gráfica	12
+Descripción Técnica	12
+Inserción de Datos	12
+Descripción	12
+Gráfica	12
+Descripción Técnica	12
+Referencias	13
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Introducción
+Este es un trabajo donde explicaremos el diseño de una base de datos para la librería del mundo de Sofía donde se nos dan ciertos requisitos los cuales se espera que dicha base cumpla este es un documento donde se enseñan cada modelo llevado a cabo para su planeación. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Caso de Estudio
+Diseñar una base de datos para un atienda de libros que gestionan el inventario, ventas y clientes. La base de datos debe permitir el registro y gestión de libros, autores, clientes, pedidos y transacciones de compra, Debes crear un diagrama UML E-R que represente la estructura de la base de datos y entregar una documentación detallada que explique las decisiones de diseño, las relaciones entre las tablas y las restricciones impuestas
+
+
+Planificación
+
+Diagrama E-R
+Modelo de entidad relación
+GRÁFICA
+
+
+DESCRIPCIÓN TÉCNICA
+ENTIDADES:
+* Clientes: (
+Id-cliente- PK
+Nombre – cadena de texto
+Apellido – Cadena de texto
+Email – Cadena de texto
+Teléfono – Numero int
+Dirección – cadena de texto
+)
+* Pedidos: (
+Id-pedidos- PK
+Fecha de compra – Date
+Estado de compra– Cadena de texto
+)
+
+* Libros: (
+Id-libros- PK
+Titulo – cadena de texto
+Autores – Cadena de texto
+Categorías – Cadena de texto
+Fecha publicación – Date
+ISBN – Numero Int
+Precio – Numero
+)
+
+* Inventario: (
+Id-Inventario- PK
+Cantidad stock – número int
+Valor por unidad – Número int
+)
+* Autores: (
+Id-Autores- PK
+Nombre – cadena de texto
+Apellido – Cadena de texto
+Fecha de nacimiento – Date
+Nacionalidad- Cadena de texto
+)
+
+* Transacciones: (
+Id-Transacciones- PK
+Método de pago – cadena de texto
+Monto Total– Número int
+Fecha Transacción– Date
+)
+* Informe ventas: (
+Id-ventas- PK
+Estadísticas de uso– int
+Fecha informe– Date
+Libro más vendido– Cadena de texto
+
+Total de ventas– Numero int
+)
+
+
+RELACIONES:
+Clientes 1: N Pedidos
+Pedidos 1: N Libros
+Libros N:M Autores
+Libros N:1 Inventario
+Pedidos N:1 Transacciones
+Transacciones N:1 Informe ventas
+
+
+
+
+MODELO LÓGICO
+
+Grafica
+
+
+DESCRIPCIÓN TÉCNICA
+ENTIDADES:
+* Clientes: (
+Id-clientes- PK
+Nombre – cadena de texto
+Apellido – Cadena de texto
+Email – Cadena de texto
+Teléfono – Numero int
+Dirección – cadena de texto
+)
+* Pedidos: (
+Id-pedidos- PK
+Id-clientes- FK
+Id-transacciones- FK
+Fecha de compra – Date
+Estado de compra– Cadena de texto
+
+)
+
+* Libros: (
+Id-libros- PK
+Id-pedidos- FK
+Id-Inventario- FK
+Titulo – cadena de texto
+Categorías – Cadena de texto
+ISBN – Numero Int
+Precio – Numero
+)
+* LIBROS_has_AUTORES:( 
+Id- LIBROS_has_AUTORES -PK
+Id-libros –FK
+Id-autores-FK
+Fecha publicación - Date
+)
+
+* Inventario: (
+Id-Inventario- PK
+Cantidad stock – número int
+Valor por unidad – Número int
+)
+* Autores: (
+Id-Autores- PK
+Nombre – cadena de texto
+Apellido – Cadena de texto
+Fecha de nacimiento – Date
+Nacionalidad- Cadena de texto
+)
+
+* Transacciones: (
+Id-Transacciones- PK
+Id-ventas- FK
+Método de pago – cadena de texto
+Monto Total– Número int
+Fecha Transacción– Date
+)
+* Informe ventas: (
+Id-ventas- PK
+Estadísticas de uso– int
+Fecha informe– Date
+Libro más vendido– Cadena de texto
+Total de ventas– Numero int
+)
+
+
+RELACIONES:
+Clientes 1: N Pedidos
+Pedidos 1: N Libros
+Libros 1: N LIBROS _has_AUTOR
+Autores 1: N LIBROS _has_AUTOR
+Libros N:1 Inventario
+Pedidos N:1 Transacciones
+Transacciones N:1 Informe ventas
+
+Normalización del Modelo Lógico
+Primera Forma Normal (1FN):
+Reglas:
+1) cada atributo debe contener valores atómicos
+2) cada fila de la misma tabla debe ser única
+3) debe prevalecer el crecimiento vertical
+
+CLIENTE
+Id-clienteNombreApellidoEmailDirección
+PEDIDOS
+Id-pedidosFecha de compraEstado de pedido
+LIBROS
+Id-librostitulocategoríaFecha publicaciónISBNPrecio
+
+INVENTARIO
+Id-inventariostockValor por unidad
+AUTORES
+Id-autoresNombreapellidoFecha de nacimientoNacionalidad
+TRANSACCIONES
+Id-transaccionesMétodo de pagoMonto total Fecha de transacción
+INFORME DE VENTA
+Id-ventasEstadísticas de usoFecha de transaccionesLibro más vendidoTotal de ventas
+Segunda Forma Normal (2FN):
+Reglas:
+1) Estar en primer forma
+2) Las relaciones deben tener una clave principal de preferencia simple.
+3) Cada atributo de la tabla debe depender totalmente del atributo clave.
+
+CLIENTE
+Id-clienteNombreApellidoEmailDirección
+PEDIDOS
+Id-pedidosFecha de compraEstado de pedidoId-clienteId-transacciones
+LIBROS
+Id-librostitulocategoríaFecha publicaciónISBNPrecioId-pedidosId-inventario
+LIBROS_has_AUTORES
+Id-autoresId-librosFecha  publicación
+AUTORES
+Id-autoresNombreapellidoFecha de nacimientoNacionalidad
+
+INVENTARIO
+Id-inventariostockValor por unidad
+TRANSACCIONES
+Id-transaccionesMétodo de pagoMonto total Fecha de transacciónId-ventas
+INFORME DE VENTA
+Id-ventasEstadísticas de usoFecha de transaccionesLibro más vendidoTotal de ventas
+Tercera Forma Normal (3FN):
+Reglas:
+1) Debe estar en segunda forma.
+2) No debe haber dependencia transitiva.
+
+CLIENTE
+Id-clienteNombreApellidoEmailDirección
+PEDIDOS
+Id-pedidosFecha de compraEstado de pedidoId-clienteId-transacciones
+
+
+
+LIBROS
+Id-librostitulocategoríaFecha publicaciónISBNPrecioId-pedidosId-inventario
+LIBROS_has_AUTORES
+LIBROS_has_AUTORES
+Id-librosId-autoresFecha  publicación
+AUTORES
+Id-autoresNombreapellidoFecha de nacimientoNacionalidad
+INVENTARIO
+Id-inventariostockValor por unidad
+
+
+
+TRANSACCIONES
+Id-transaccionesMétodo de pagoMonto total Fecha de transacciónId-ventas
+INFORME DE VENTA
+Id-ventasEstadísticas de usoFecha de transaccionesLibro más vendidoTotal de ventas
+Construcción del Modelo Conceptual
+
+
+Construcción del Modelo Físico
+
+
+SQL SCRIPT:
+
+CREATE TABLE CLIENTE (
+
+	Id-cliente INT NOT NULL AUTO _INCREMENT PRIMARY KEY,
+	Nombre Varchar [45] NOT NULL,
+	Apellido Varchar [45] NOT NULL,
+	Email Varchar [45] NOT NULL,
+	Telefono Varchar [45] NOT NULL,
+	Dirección Varchar [45] NOT NULL,
+
+
+),
+
+
+CREATE TABLE PEDIDOS (
+
+	Id-pedidos INT NOT NULL AUTO _INCREMENT PRIMARY KEY,
+	Fecha de compra DATE NOT NULL,
+	Estado de compra Varchar [45] NOT NULL,
+	Id-cliente INT NOT NULL AUTO _INCREMENT FOREIGN KEY,
+	Id-transacciones INT NOT NULL AUTO _INCREMENT FOREIGN KEY,
+),
+CREATE TABLE LIBROS (
+
+	Id-libros INT NOT NULL AUTO _INCREMENT PRIMARY KEY,
+	Título Varchar [45] NOT NULL,
+	Categoría Varchar [45] NOT NULL,
+	ISBN INT NOT NULL,
+	Precio INT NOT NULL,
+	Id-pedidos INT NOT NULL AUTO _INCREMENT FOREIGN KEY,
+	Id-inventario INT NOT NULL AUTO _INCREMENT FOREIGN KEY,
+
+),
+CREATE TABLE INVENTARIO (
+
+	Id-inventario INT NOT NULL AUTO _INCREMENT PRIMARY KEY,
+	stock INT NOT NULL,
+	valor Unidad INT NOT NULL,
+),
+CREATE TABLE AUTORES (
+
+	Id-autores INT NOT NULL AUTO _INCREMENT PRIMARY KEY,
+	Nombre Varchar [45] NOT NULL,
+	Apellido Varchar [45] NOT NULL,
+	Fecha de nacimiento DATE NOT NULL,
+	Nacionalidad Varchar [45] NOT NULL,
+),
+CREATE TABLE TRANSACCIONES (
+
+	Id-transacciones INT NOT NULL AUTO _INCREMENT PRIMARY KEY,
+	Método de pago Varchar [45] NOT NULL,
+	Monto Total INT NOT NULL,
+	Fecha de transacción DATE NOT NULL,
+Id-ventas INT NOT NULL AUTO _INCREMENT FOREIGN KEY,
+	
+
+),
+CREATE TABLE INFORMES DE VENTAS (
+
+	Id-ventas INT NOT NULL AUTO _INCREMENT PRIMARY KEY,
+	Estadísticas de uso INT NOT NULL,
+	Fecha de venta DATE NOT NULL,
+	Total de ventas INT NOT NULL,
+	Libro más vendido Varchar [45] NOT NULL,
+),
+
+
+
+
+
+
